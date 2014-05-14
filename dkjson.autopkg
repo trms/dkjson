@@ -1,0 +1,48 @@
+nuget {
+	nuspec {
+		id = dkjson;
+		title: dkjson;
+		version: 2.5.0.2;
+		authors: {coapp, David Heiko Kolf, Christian Bechette, Tightrope Media Systems};
+		owners: {David Heiko Kolf};
+
+		licenseUrl: "http://opensource.org/licenses/MIT";
+		projectUrl: "http://dkolf.de/src/dkjson-lua.fsl/home";
+		copyright: "Copyright (C) 2010-2014 David Heiko Kolf";
+		
+		requireLicenseAcceptance: false;
+		summary: "This is a JSON module written in Lua.";
+		releaseNotes: @"http://dkolf.de/src/dkjson-lua.fsl/raw/readme.txt?name=8bb9c56a6f08adbfca24d4b7f06d66914914520f"; 
+		description: @"dkjson is a command-line argument parser for Lua.";
+		tags: {native, Lua, module};
+	}
+	dependencies {
+        // This node defines any outside items which may be needed to consume this package.
+        packages : {
+            // This is a list of other NuGet packages required to use this package.
+            // Each item follows the format "<pkg_name>/<version>"
+            lua/"[5.1, 5.4)",
+        };
+    }
+	files {
+		// declare a lua collection
+		lua : {
+			// copies the whole folder tree.
+			#add-all-files : Items.dkjsonDir;
+			// set the destination in the package itself. 
+			#destination : ${build_root}\dkjson;
+		};
+		
+		lua: {"*.lua"};
+    }
+
+    targets {
+		AfterBuild {
+			.Copy {
+				DestinationFolder = "$(TargetDir)dkjson";
+				SourceFiles = "@(dkjsonDir)";
+				SkipUnchangedFiles = true;
+			};
+		};
+	}
+}
