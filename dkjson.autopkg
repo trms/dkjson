@@ -2,7 +2,7 @@ nuget {
 	nuspec {
 		id = dkjson;
 		title: dkjson;
-		version: 2.5.0.3;
+		version: 2.5.0.4;
 		authors: {coapp, David Heiko Kolf, Christian Bechette, Tightrope Media Systems};
 		owners: {David Heiko Kolf};
 
@@ -39,7 +39,7 @@ nuget {
     targets {
 		AfterBuild {
 			.Copy {
-				DestinationFolder = "$(TargetDir)dkjson";
+				DestinationFolder = "$(TargetDir)";
 				SourceFiles = "@(dkjsonDir)";
 				SkipUnchangedFiles = true;
 			};
